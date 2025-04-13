@@ -4,6 +4,18 @@ import {  WorkOS } from "@workos-inc/node";
 import { createCompany } from "../components/actions/workosAction";
 export default async function NewListingPage(){
     const {user}=await withAuth();
+   
+        async function handleCompany(data:FormData){
+            'use server'
+            if(user){
+                await createCompany(data.get('newCompany') as string ,user.id)
+
+            }
+         
+        
+
+    }
+   
     if(!user){
         return (
             <div className="container">
@@ -46,7 +58,8 @@ export default async function NewListingPage(){
                      </div>
                       <h1 className="text-lg font-bold mt-6">Create a new company</h1>
                       <p className="text-gray-400 text-sm mb-2">To create a job lisitng yopu first need to registred</p>
-                    <form action={ createCompany} className="flex gap-2">
+                      {/* for making organization under user we have to pass user.id too */}
+                    <form action={handleCompany} className="flex gap-2">
                       
                         <input type="text" name="newCompany" id=""
                         className="p-2 border border-gray-400 rounded-md"
