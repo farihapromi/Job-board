@@ -9,5 +9,11 @@ export default authkitMiddleware({
 });
 
 export const config = {
-  matcher: ['/','/new-listing'],
+  matcher: [
+    '/',
+    '/new-listing',
+    '/new-company',
+    '/new-listing/:orgId*',
+  
+  ],
 };
