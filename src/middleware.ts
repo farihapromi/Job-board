@@ -9,5 +9,5 @@ export default authkitMiddleware({
 });
 
 export const config = {
-  matcher: ['/', '/account/:path*'],
+  matcher: ['/','/new-listing'],
 };

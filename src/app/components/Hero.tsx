@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Hero = () => {
+const   Hero = async() => {
+     
   return (
     <div>
         <section className='py-12'>

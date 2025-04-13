@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -5,6 +6,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
+// Load custom fonts
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -28,16 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <main className="py-4 px-6 container max-auto">
-        <Header/>
-       
-
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
+      >
+        <Header />
+        <main className="flex-grow py-4 px-6 container mx-auto">
+          {children}
         </main>
-      
-        
-        {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );
