@@ -1,7 +1,9 @@
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
-import { TextArea, TextField, Theme, RadioGroup } from '@radix-ui/themes';
+
 import '@radix-ui/themes/styles.css';
+
+import JobForm from '@/app/components/JobForm';
 
 type PageProps = {
   params: {
@@ -29,22 +31,5 @@ export default async function NewListingForOrgId(props: PageProps) {
     return 'No Access';
   }
 
-  return (
-    <Theme>
-      <form action='' className='container mt-6 flex flex-col gap-2'>
-        <TextField.Root placeholder='Job Title' />
-
-        <div className='flex gap-4'></div>
-        <div>
-          Remote?
-          <RadioGroup.Root defaultValue='1' name='example'>
-            <RadioGroup.Item value='1'>On-Site</RadioGroup.Item>
-            <RadioGroup.Item value='2'>Hybrid-Remote</RadioGroup.Item>
-            <RadioGroup.Item value='3'>Fully Remote</RadioGroup.Item>
-          </RadioGroup.Root>
-        </div>
-        <TextArea placeholder='Job Description' resize='vertical' />
-      </form>
-    </Theme>
-  );
+  return <JobForm />;
 }
