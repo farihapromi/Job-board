@@ -1,20 +1,23 @@
-import React from 'react'
-import JobRow from './JobRow'
+import React from 'react';
+import JobRow from './JobRow';
 
-const Jobs = () => {
+export default function Jobs({
+  header,
+  jobs,
+}: {
+  header: string;
+  jobs: Job[];
+}) {
   return (
-    <div className='max-w-4xl mx-auto bg-gray-300 p-6 rounded-3xl'>
-      <div className="container">
-      <h2 className='text-xl font-semibold mb-4'>Recent Jobs</h2>
-      <div className="flex flex-col gap-4">
-        <JobRow/>
-        <JobRow/>
-         <JobRow/>
-         <JobRow/>
-       </div>
-      </div>
-     </div>
-  )
-}
+    <div className='bg-slate-200 py-6 rounded-3xl'>
+      <div className='container'>
+        <h2 className='font-bold mb-4'>{header || 'Recent jobs'}</h2>
 
-export default Jobs
+        <div className='flex flex-col gap-4'>
+          {!jobs?.length && <div>No jobs found</div>}
+          {jobs && jobs.map((job) => <JobRow jobDoc={job} />)}
+        </div>
+      </div>
+    </div>
+  );
+}

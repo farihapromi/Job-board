@@ -1,4 +1,30 @@
-import {model,models, Schema} from 'mongoose'
+import {model,models, Schema} from 'mongoose';
+
+export type Job = {
+    _id: string;
+    title: string;
+    description: string;
+    orgName?: string;
+    remote: string;
+    type: string;
+    salary: number;
+    country: string;
+    state: string;
+    city: string;
+    countryId: string;
+    stateId: string;
+    cityId: string;
+    jobIcon: string;
+    contactPhoto: string;
+    contactName: string;
+    contactPhone: string;
+    contactEmail: string;
+    orgId: string;
+    createdAt: string;
+    updatedAt: string;
+    isAdmin?: boolean;
+  };
+  
 
 const JobSchema = new Schema({
     title: {type: String, required: true},
@@ -8,7 +34,7 @@ const JobSchema = new Schema({
     salary: {type: Number, required: true},
     country: {type: String, required: true},
     state: {type: String, required: true},
-    city: {type: String},
+    city: {type: String,required: true},
     countryId: {type: String, required: true},
     stateId: {type: String, required: true},
     cityId: {type: String, required: true},
@@ -21,4 +47,4 @@ const JobSchema = new Schema({
   }, {
     timestamps: true,
   });
-   export const JobModel=models?.Job || model('Job',JobSchema)
+   export const Job=models?.Job || model('Job',JobSchema)
