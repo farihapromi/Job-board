@@ -13,6 +13,11 @@ export default async function CompanyJobsPage(props: PageProps) {
   const org = await workos.organizations.getOrganization(props.params.orgId);
   await mongoose.connect(process.env.MONGO_URI as string);
   const jobsDocs = await Job.find({ orgId: org.id });
+  const orgs = [];
+  for (const job of jobsDocs) {
+    const org = await workos.organizations.getOrganization(job.orgId);
+    job.orgName = org.name;
+  }
   return (
     <div>
       <div className='container'>

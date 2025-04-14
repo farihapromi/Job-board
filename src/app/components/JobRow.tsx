@@ -1,8 +1,10 @@
 import React from 'react';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { Jobs } from '@/models/Job';
+import { Job } from '@/models/Job';
 
-const JobRow = ({ jobDoc }: { jobDoc: object }) => {
+const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
   return (
     <div className='bg-white p-4 rounded-lg shadow-md relative'>
       <div className='absolute top-2 right-4  hover:text-red-500 cursor-pointer'>
@@ -19,7 +21,7 @@ const JobRow = ({ jobDoc }: { jobDoc: object }) => {
         </div>
 
         <div className='grow'>
-          <div className='text-gray-500 text-sm'>Spotify</div>
+          <div className='text-gray-500 text-sm'>{jobDoc.orgName}</div>
           <div className='font-bold mb-2 text-lg'>{jobDoc.title}</div>
           <div className='text-gray-600 text-xs'>
             Remote &middot; New York, US &middot; Full-time

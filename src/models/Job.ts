@@ -1,6 +1,6 @@
 import {model,models, Schema} from 'mongoose';
 
-export type Job = {
+export type Jobs = {
     _id: string;
     title: string;
     description: string;
