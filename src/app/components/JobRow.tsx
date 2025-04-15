@@ -17,13 +17,9 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
         <FontAwesomeIcon className='size-6 text-gray-400' icon={faHeart} />
       </div>
 
-      <div className='flex gap-4'>
-        <div className='content-center'>
-          <img
-            className='size-12'
-            src='https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green-300x300.png'
-            alt='Spotify'
-          />
+      <div className='flex grow gap-4'>
+        <div className='content-center w-12 basis-12 shrink-0'>
+          <img className='size-12' src={jobDoc?.jobIcon} alt='' />
         </div>
         <div className='grow sm:flex'>
           <div className='grow '>

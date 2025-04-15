@@ -1,7 +1,8 @@
 'use client';
 
 import { saveJobAction } from './actions/JobAction';
-import ImageUpload from '@/app/components/ImageUpload';
+// import ImageUpload from '@/app/components/ImageUpload';
+import ImageUpload from './ImageUpload';
 
 import type { Jobs } from '@/models/Job';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
