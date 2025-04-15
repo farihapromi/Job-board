@@ -1,5 +1,14 @@
 import {model,models, Schema} from 'mongoose';
 
+import { withAuth } from '@workos-inc/authkit-nextjs';
+import {
+  AutoPaginatable,
+  OrganizationMembership,
+  User,
+  WorkOS,
+} from '@workos-inc/node';
+import mongoose from 'mongoose';
+
 export type Jobs = {
     _id: string;
     title: string;
@@ -47,4 +56,29 @@ const JobSchema = new Schema({
   }, {
     timestamps: true,
   });
+  export async  function addOrgAndUserData(jobsDocs:Jobs[],user:User|null){
+   
+      
+      await mongoose.connect(process.env.MONGO_URI as string);
+      const workos = new WorkOS(process.env.WORKOS_API_KEY);
+      jobsDocs = JSON.parse(JSON.stringify(jobsDocs));
+      let oms: AutoPaginatable<OrganizationMembership> | null = null;
+      if (user) {
+        oms = await workos.userManagement.listOrganizationMemberships({
+          userId: user.id,
+        });
+      }
+    
+      for (const job of jobsDocs) {
+        const org = await workos.organizations.getOrganization(job.orgId);
+        job.orgName = org.name;
+        if (oms && oms.data.length > 0) {
+          job.isAdmin = !!oms.data.find((om) => om.organizationId === job.orgId);
+        }
+      }
+  return jobsDocs;
+
+
+   }
+
    export const Job=models?.Job || model('Job',JobSchema)

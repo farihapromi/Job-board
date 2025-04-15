@@ -32,8 +32,19 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
         </div>
         <div className='grow sm:flex'>
           <div className='grow '>
-            <div className='text-gray-500 text-sm'>{jobDoc.orgName}</div>
-            <div className='font-bold mb-2 text-lg '>{jobDoc.title}</div>
+            <div>
+              <Link
+                href={`/jobs/${jobDoc.orgId}`}
+                className='hover:underline text-gray-500 text-sm'
+              >
+                {jobDoc.orgName || '?'}
+              </Link>
+            </div>
+            <div className='font-bold text-lg mb-1'>
+              <Link className='hover:underline' href={'/show/' + jobDoc._id}>
+                {jobDoc.title}
+              </Link>
+            </div>
             <div className='text-gray-600 text-sm capitalize'>
               {jobDoc.remote} - {jobDoc.city}, {jobDoc.country} - {jobDoc.type}
               -time
