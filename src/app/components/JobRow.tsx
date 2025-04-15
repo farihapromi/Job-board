@@ -3,6 +3,9 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Jobs } from '@/models/Job';
 import { Job } from '@/models/Job';
+import TimeAgo from './TimeAgo';
+import { withAuth } from '@workos-inc/authkit-nextjs';
+import { WorkOS } from '@workos-inc/node';
 
 const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
   return (
@@ -19,16 +22,21 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
             alt='Spotify'
           />
         </div>
-
-        <div className='grow'>
-          <div className='text-gray-500 text-sm'>{jobDoc.orgName}</div>
-          <div className='font-bold mb-2 text-lg'>{jobDoc.title}</div>
-          <div className='text-gray-600 text-xs'>
-            Remote &middot; New York, US &middot; Full-time
+        <div className='grow sm:flex'>
+          <div className='grow '>
+            <div className='text-gray-500 text-sm'>{jobDoc.orgName}</div>
+            <div className='font-bold mb-2 text-lg mb-1'>{jobDoc.title}</div>
+            <div className='text-gray-600 text-sm capitalize'>
+              {jobDoc.remote} - {jobDoc.city}, {jobDoc.country} - {jobDoc.type}
+              -time
+            </div>
           </div>
+          {jobDoc.createdAt && (
+            <div className='content-end text-gray-500 text-sm'>
+              <TimeAgo createdAt={jobDoc.createdAt} />
+            </div>
+          )}
         </div>
-
-        <div className='text-gray-600 text-sm content-end'>2 weeks ago</div>
       </div>
     </div>
   );
