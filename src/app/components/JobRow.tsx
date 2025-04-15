@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +7,8 @@ import { Job } from '@/models/Job';
 import TimeAgo from './TimeAgo';
 import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
+import Link from 'next/link';
+import axios from 'axios';
 
 const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
   return (
@@ -25,10 +28,28 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
         <div className='grow sm:flex'>
           <div className='grow '>
             <div className='text-gray-500 text-sm'>{jobDoc.orgName}</div>
-            <div className='font-bold mb-2 text-lg mb-1'>{jobDoc.title}</div>
+            <div className='font-bold mb-2 text-lg '>{jobDoc.title}</div>
             <div className='text-gray-600 text-sm capitalize'>
               {jobDoc.remote} - {jobDoc.city}, {jobDoc.country} - {jobDoc.type}
               -time
+              {jobDoc.isAdmin && (
+                <>
+                  {' '}
+                  &middot; <Link href={'/jobs/edit/' + jobDoc._id}>
+                    Edit
+                  </Link>{' '}
+                  &middot;{' '}
+                  <button
+                    type='button'
+                    onClick={async () => {
+                      await axios.delete('/api/jobs?id=' + jobDoc._id);
+                      window.location.reload();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </>
+              )}
             </div>
           </div>
           {jobDoc.createdAt && (
