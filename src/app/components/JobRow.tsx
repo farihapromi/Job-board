@@ -9,6 +9,15 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 import { WorkOS } from '@workos-inc/node';
 import Link from 'next/link';
 import axios from 'axios';
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from '@radix-ui/react-alert-dialog';
 
 const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
   return (
@@ -35,15 +44,39 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
                     Edit
                   </Link>{' '}
                   &middot;{' '}
-                  <button
-                    type='button'
-                    onClick={async () => {
-                      await axios.delete('/api/jobs?id=' + jobDoc._id);
-                      window.location.reload();
-                    }}
-                  >
-                    Delete
-                  </button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <button
+                        type='button'
+                        className='text-red-500 hover:underline'
+                      >
+                        Delete
+                      </button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className='rounded-lg bg-gray-500 p-4 shadow-xl max-w-xs mx-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
+                      <AlertDialogTitle className='text-lg font-semibold text-white'>
+                        Confirm Deletion
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className='text-white mt-2'>
+                        Are you sure you want to delete this job? This action
+                        cannot be undone.
+                      </AlertDialogDescription>
+                      <div className='mt-4 flex justify-end gap-2'>
+                        <AlertDialogCancel className='px-4 py-2 rounded-md border text-black'>
+                          Cancel
+                        </AlertDialogCancel>
+                        <AlertDialogAction
+                          className='px-4 py-2 bg-red-500 text-white rounded-md'
+                          onClick={async () => {
+                            await axios.delete('/api/jobs?id=' + jobDoc._id);
+                            window.location.reload();
+                          }}
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </div>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </>
               )}
             </div>
