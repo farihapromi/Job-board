@@ -37,8 +37,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >
-        <Header />
         <AuthKitProvider>
+          <Header />
           <main className='flex-grow py-4 px-6 container mx-auto'>
             {children}
           </main>
