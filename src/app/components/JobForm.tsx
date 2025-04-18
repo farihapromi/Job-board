@@ -1,7 +1,7 @@
 'use client';
 
 import { saveJobAction } from './actions/JobAction';
-// import ImageUpload from '@/app/components/ImageUpload';
+
 import ImageUpload from './ImageUpload';
 
 import type { Jobs } from '@/models/Job';
@@ -14,7 +14,7 @@ import {
   Theme,
 } from '@radix-ui/themes';
 import { redirect } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import 'react-country-state-city/dist/react-country-state-city.css';
 import {
   CitySelect,
@@ -23,8 +23,6 @@ import {
 } from 'react-country-state-city';
 import {
   faEnvelope,
-  faMobile,
-  faPerson,
   faPhone,
   faStar,
   faUser,

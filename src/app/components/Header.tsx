@@ -1,11 +1,20 @@
-// src/app/components/Header.tsx
-import { getSignInUrl, withAuth, signOut } from '@workos-inc/authkit-nextjs';
+import {
+  getSignInUrl,
+  getUser,
+  signOut,
+  withAuth,
+  getSignUpUrl,
+} from '@workos-inc/authkit-nextjs';
+
 import Link from 'next/link';
+
+import { redirect } from 'next/navigation';
+import { logout } from './actions/authActions';
 
 export default async function Header() {
   const { user } = await withAuth();
   const signInUrl = await getSignInUrl();
-
+  const signUpUrl = await getSignUpUrl();
   return (
     <header>
       <div className='container flex items-center justify-between mx-auto my-4'>
@@ -21,14 +30,13 @@ export default async function Header() {
               Login
             </Link>
           )}
+
+          {/* {user && <LogoutButton />} */}
           {user && (
             <form
               action={async () => {
                 'use server';
-                await signOut(); // Explicitly provide returnTo
-                // You might need to redirect after signOut. Consider using next/navigation's redirect.
-                // import { redirect } from 'next/navigation';
-                // redirect('/');
+                await logout();
               }}
             >
               <button

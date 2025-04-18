@@ -1,4 +1,7 @@
 // app/layout.tsx
+import { WorkOSProvider } from '@workos-inc/authkit-nextjs';
+import { AuthKitProvider } from '@workos-inc/authkit-nextjs/components';
+
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -35,9 +38,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >
         <Header />
-        <main className='flex-grow py-4 px-6 container mx-auto'>
-          {children}
-        </main>
+        <AuthKitProvider
+          clientId={process.env.WORKOS_CLIENT_ID}
+          appUrl={process.env.NEXT_PUBLIC_APP_URL} // Ensure this is set
+        >
+          <main className='flex-grow py-4 px-6 container mx-auto'>
+            {children}
+          </main>
+        </AuthKitProvider>
+
         <Footer />
       </body>
     </html>

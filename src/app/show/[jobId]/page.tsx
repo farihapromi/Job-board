@@ -1,3 +1,4 @@
+import dbConnect from '@/libs/mongoose';
 import { Job } from '@/models/Job';
 import mongoose from 'mongoose';
 import Image from 'next/image';
@@ -10,6 +11,7 @@ type PageProps = {
 export default async function SingleJobPage(props: PageProps) {
   const jobId = props.params.jobId;
   await mongoose.connect(process.env.MONGO_URI as string);
+  // await dbConnect();
   const jobDoc = await Job.findById(jobId);
   return (
     <div className='container mt-8 my-6'>

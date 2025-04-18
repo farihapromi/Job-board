@@ -6,7 +6,9 @@ import {
   getSignInUrl,
   getSignUpUrl,
   withAuth,
+  signOut,
 } from '@workos-inc/authkit-nextjs';
+import mongoose from 'mongoose';
 
 // This is a Server Component that fetches data asynchronously
 export default async function Home() {
@@ -19,6 +21,7 @@ export default async function Home() {
   // // Get the URL to redirect the user to AuthKit to sign up
   // const signUpUrl = await getSignUpUrl();
   const { user } = await withAuth();
+  await mongoose.connect(process.env.MONGO_URI as string);
   const latestJobs = await addOrgAndUserData(
     await Job.find({}, {}, { limit: 5, sort: '-createdAt' }),
     user
