@@ -38,10 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col`}
       >
         <Header />
-        <AuthKitProvider
-          clientId={process.env.WORKOS_CLIENT_ID}
-          appUrl={process.env.NEXT_PUBLIC_APP_URL} // Ensure this is set
-        >
+        <AuthKitProvider>
           <main className='flex-grow py-4 px-6 container mx-auto'>
             {children}
           </main>

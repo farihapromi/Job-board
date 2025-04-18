@@ -1,7 +1,6 @@
 'use client';
 
 import { saveJobAction } from './actions/JobAction';
-
 import ImageUpload from './ImageUpload';
 
 import type { Jobs } from '@/models/Job';
@@ -21,6 +20,7 @@ import {
   CountrySelect,
   StateSelect,
 } from 'react-country-state-city';
+
 import {
   faEnvelope,
   faPhone,
@@ -35,9 +35,9 @@ export default function JobForm({
   orgId: string;
   jobDoc?: Jobs;
 }) {
-  const [countryId, setCountryId] = useState(jobDoc?.countryId || 0);
-  const [stateId, setStateId] = useState(jobDoc?.stateId || 0);
-  const [cityId, setCityId] = useState(jobDoc?.cityId || 0);
+  const [countryId, setCountryId] = useState(Number(jobDoc?.countryId) || 0);
+  const [stateId, setStateId] = useState(Number(jobDoc?.stateId) || 0);
+  const [cityId, setCityId] = useState(Number(jobDoc?.cityId) || 0);
   const [countryName, setCountryName] = useState(jobDoc?.country || '');
   const [stateName, setStateName] = useState(jobDoc?.state || '');
   const [cityName, setCityName] = useState(jobDoc?.city || '');
@@ -50,6 +50,7 @@ export default function JobForm({
     data.set('stateId', stateId.toString());
     data.set('cityId', cityId.toString());
     data.set('orgId', orgId);
+
     const jobDoc = await saveJobAction(data);
     redirect(`/jobs/${jobDoc.orgId}`);
   }
@@ -61,11 +62,13 @@ export default function JobForm({
         className='container mt-6 flex flex-col gap-4'
       >
         {jobDoc && <input type='hidden' name='id' value={jobDoc?._id} />}
+
         <TextField.Root
           name='title'
           placeholder='Job title'
           defaultValue={jobDoc?.title || ''}
         />
+
         <div className='grid sm:grid-cols-3 gap-6 *:grow'>
           <div>
             Remote?
@@ -78,6 +81,7 @@ export default function JobForm({
               <RadioGroup.Item value='remote'>Fully remote</RadioGroup.Item>
             </RadioGroup.Root>
           </div>
+
           <div>
             Full time?
             <RadioGroup.Root defaultValue={jobDoc?.type || 'full'} name='type'>
@@ -86,6 +90,7 @@ export default function JobForm({
               <RadioGroup.Item value='full'>Full-time</RadioGroup.Item>
             </RadioGroup.Root>
           </div>
+
           <div>
             Salary
             <TextField.Root name='salary' defaultValue={jobDoc?.salary || ''}>
@@ -94,48 +99,45 @@ export default function JobForm({
             </TextField.Root>
           </div>
         </div>
+
         <div>
           Location
           <div className='flex flex-col sm:flex-row gap-4 *:grow'>
             <CountrySelect
-              defaultValue={
-                countryId
-                  ? { id: Number(countryId), name: countryName }
-                  : undefined
-              }
-              onChange={(e: { id: number; name: string }) => {
-                setCountryId(e.id);
-                setCountryName(e.name);
+              value={countryId || undefined}
+              onChange={(e) => {
+                const { id, name } = e as { id: number; name: string };
+                setCountryId(id);
+                setCountryName(name);
               }}
               placeHolder='Select Country'
             />
 
             <StateSelect
-              defaultValue={
-                stateId ? { id: Number(stateId), name: stateName } : undefined
-              }
-              countryid={countryId}
-              onChange={(e: { id: number; name: string }) => {
-                setStateId(e.id);
-                setStateName(e.name);
+              value={stateId || undefined}
+              countryid={Number(countryId)}
+              onChange={(e) => {
+                const { id, name } = e as { id: number; name: string };
+                setStateId(id);
+                setStateName(name);
               }}
               placeHolder='Select State'
             />
 
             <CitySelect
-              defaultValue={
-                cityId ? { id: Number(cityId), name: cityName } : undefined
-              }
-              countryid={countryId}
-              stateid={stateId}
-              onChange={(e: { id: number; name: string }) => {
-                setCityId(e.id);
-                setCityName(e.name);
+              value={cityId || undefined}
+              countryid={Number(countryId)}
+              stateid={Number(stateId)}
+              onChange={(e) => {
+                const { id, name } = e as { id: number; name: string };
+                setCityId(id);
+                setCityName(name);
               }}
               placeHolder='Select City'
             />
           </div>
         </div>
+
         <div className='sm:flex'>
           <div className='w-1/3'>
             <h3>Job icon</h3>
@@ -189,12 +191,14 @@ export default function JobForm({
             </div>
           </div>
         </div>
+
         <TextArea
           defaultValue={jobDoc?.description || ''}
           placeholder='Job description'
           resize='vertical'
           name='description'
         />
+
         <div className='flex justify-center'>
           <Button size='3'>
             <span className='px-8'>Save</span>
