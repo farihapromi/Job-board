@@ -1,6 +1,6 @@
 import {model,models, Schema} from 'mongoose';
 
-import { withAuth } from '@workos-inc/authkit-nextjs';
+
 import {
   AutoPaginatable,
   OrganizationMembership,

@@ -1,20 +1,13 @@
-import {
-  getSignInUrl,
-  getUser,
-  signOut,
-  withAuth,
-  getSignUpUrl,
-} from '@workos-inc/authkit-nextjs';
+import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
 
 import Link from 'next/link';
 
-import { redirect } from 'next/navigation';
 import { logout } from './actions/authActions';
 
 export default async function Header() {
   const { user } = await withAuth();
   const signInUrl = await getSignInUrl();
-  const signUpUrl = await getSignUpUrl();
+
   return (
     <header>
       <div className='container flex items-center justify-between mx-auto my-4'>
