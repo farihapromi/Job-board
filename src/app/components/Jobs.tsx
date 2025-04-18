@@ -16,7 +16,7 @@ export default function Jobs({
 
         <div className='flex flex-col gap-4 m-6'>
           {!jobs?.length && <div>No jobs found</div>}
-          {jobs && jobs.map((job) => <JobRow jobDoc={job} />)}
+          {jobs && jobs.map((job) => <JobRow key={job._id} jobDoc={job} />)}
         </div>
       </div>
     </div>

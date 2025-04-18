@@ -11,7 +11,7 @@ export default async function NewCompanyPage() {
   }
 
   if (!user) {
-    ('Login to use this page');
+    return <div className='text-red-500'>Login to use this page</div>;
   }
 
   return (

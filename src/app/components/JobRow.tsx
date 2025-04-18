@@ -3,10 +3,10 @@ import React from 'react';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Jobs } from '@/models/Job';
-import { Job } from '@/models/Job';
+import Image from 'next/image';
+
 import TimeAgo from './TimeAgo';
-import { withAuth } from '@workos-inc/authkit-nextjs';
-import { WorkOS } from '@workos-inc/node';
+
 import Link from 'next/link';
 import axios from 'axios';
 import {
@@ -28,7 +28,13 @@ const JobRow = ({ jobDoc }: { jobDoc: Jobs }) => {
 
       <div className='flex grow gap-4'>
         <div className='content-center w-12 basis-12 shrink-0'>
-          <img className='size-12' src={jobDoc?.jobIcon} alt='' />
+          <Image
+            className='size-12'
+            src={jobDoc?.jobIcon || '/default-image.jpg'}
+            alt=''
+            width={48} // Set the width
+            height={48} // Set the height
+          />
         </div>
         <div className='grow sm:flex'>
           <div className='grow '>

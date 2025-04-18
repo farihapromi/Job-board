@@ -99,28 +99,36 @@ export default function JobForm({
           <div className='flex flex-col sm:flex-row gap-4 *:grow'>
             <CountrySelect
               defaultValue={
-                countryId ? { id: countryId, name: countryName } : 0
+                countryId
+                  ? { id: Number(countryId), name: countryName }
+                  : undefined
               }
-              onChange={(e: any) => {
+              onChange={(e: { id: number; name: string }) => {
                 setCountryId(e.id);
                 setCountryName(e.name);
               }}
               placeHolder='Select Country'
             />
+
             <StateSelect
-              defaultValue={stateId ? { id: stateId, name: stateName } : 0}
+              defaultValue={
+                stateId ? { id: Number(stateId), name: stateName } : undefined
+              }
               countryid={countryId}
-              onChange={(e: any) => {
+              onChange={(e: { id: number; name: string }) => {
                 setStateId(e.id);
                 setStateName(e.name);
               }}
               placeHolder='Select State'
             />
+
             <CitySelect
-              defaultValue={cityId ? { id: cityId, name: cityName } : 0}
+              defaultValue={
+                cityId ? { id: Number(cityId), name: cityName } : undefined
+              }
               countryid={countryId}
               stateid={stateId}
-              onChange={(e: any) => {
+              onChange={(e: { id: number; name: string }) => {
                 setCityId(e.id);
                 setCityName(e.name);
               }}

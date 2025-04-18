@@ -1,4 +1,3 @@
-import dbConnect from '@/libs/mongoose';
 import { Job } from '@/models/Job';
 import mongoose from 'mongoose';
 import Image from 'next/image';

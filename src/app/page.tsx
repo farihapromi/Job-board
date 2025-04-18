@@ -2,12 +2,7 @@
 import { addOrgAndUserData, Job } from '@/models/Job';
 import Hero from './components/Hero';
 import Jobs from './components/Jobs';
-import {
-  getSignInUrl,
-  getSignUpUrl,
-  withAuth,
-  signOut,
-} from '@workos-inc/authkit-nextjs';
+import { withAuth } from '@workos-inc/authkit-nextjs';
 import mongoose from 'mongoose';
 
 // This is a Server Component that fetches data asynchronously

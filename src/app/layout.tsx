@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { WorkOSProvider } from '@workos-inc/authkit-nextjs';
+
 import { AuthKitProvider } from '@workos-inc/authkit-nextjs/components';
 
 import type { Metadata } from 'next';
