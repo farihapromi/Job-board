@@ -1,4 +1,7 @@
-import { getSignInUrl, withAuth } from '@workos-inc/authkit-nextjs';
+import { withAuth } from '@workos-inc/authkit-nextjs';
+
+import { signOut, getSignInUrl } from '@workos-inc/authkit-nextjs';
+import { signIn } from '@workos-inc/authkit-nextjs';
 
 import Link from 'next/link';
 
@@ -30,6 +33,8 @@ export default async function Header() {
               action={async () => {
                 'use server';
                 await logout();
+
+                //await signOut();
               }}
             >
               <button
