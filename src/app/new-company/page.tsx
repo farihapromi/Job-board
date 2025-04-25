@@ -16,7 +16,7 @@ export default async function NewCompanyPage() {
 
   return (
     <div className='container'>
-      <h2 className='text-lg mt-6 font-bold bg-blue-700 text-white '>
+      <h2 className='text-2xl mt-6 font-bold text-black  '>
         Create a new company
       </h2>
       <p className='text-gray-500 text-sm mb-2'>

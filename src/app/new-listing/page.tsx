@@ -34,47 +34,39 @@ export default async function NewListingPage() {
 
   return (
     <>
-      <div className='container'>
-        <div>
-          <h1 className='text-lg font-bold mt-6'>Your Companies</h1>
+      <div className='container max-w-2xl mx-auto px-4 py-8'>
+        <h1 className='text-2xl font-bold mb-4'>Your Companies</h1>
+        <p className='text-gray-500 text-sm mb-6'>
+          Select a company to create a job listing for
+        </p>
 
-          <p className='text-gray-400 text-sm mb-2'>
-            Select a company to create job add for
-          </p>
-          <div>
-            <div className='border inline-block rounded-md'>
-              {Object.keys(organizationsNames).map((orgId) => (
-                <div key={orgId}>
-                  <Link
-                    href={'/new-listing/' + orgId}
-                    className={
-                      'py-2 px-4 flex gap-2 items-center ' +
-                      (Object.keys(organizationsNames)[0] === orgId
-                        ? ''
-                        : 'border-t')
-                    }
-                  >
-                    {organizationsNames[orgId]}
-                  </Link>
-                </div>
-              ))}
-            </div>
+        {Object.keys(organizationsNames).length > 0 ? (
+          <div className='grid gap-4 '>
+            {Object.entries(organizationsNames).map(
+              ([orgId, orgName], index) => (
+                <Link
+                  key={orgId}
+                  href={`/new-listing/${orgId}`}
+                  className='block border rounded-lg px-5 py-4 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 hover:bg-gray-50'
+                >
+                  <div className='font-medium text-lg'>{orgName}</div>
+                </Link>
+              )
+            )}
           </div>
+        ) : (
+          <div className='border border-blue-300 bg-blue-50 text-blue-800 p-4 rounded-md mb-6'>
+            No companies found assigned to your user.
+          </div>
+        )}
 
-          {organizationMemberships.data.length === 0 && (
-            <div className='border border-blue-300 bg-blue-50 p-4 rounded-md'>
-              No Companies found assigned to your user
-            </div>
-          )}
-
-          <Link
-            className='inline-flex gap-2 items-center bg-gray-200 px-4 py-2 rounded-md mt-6'
-            href={'/new-company'}
-          >
-            Create a new company
-            <FontAwesomeIcon className='h-4' icon={faArrowRight} />
-          </Link>
-        </div>
+        <Link
+          href='/new-company'
+          className='mt-6 inline-flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md shadow-sm transition-colors'
+        >
+          <span>Create a new company</span>
+          <FontAwesomeIcon className='h-4' icon={faArrowRight} />
+        </Link>
       </div>
     </>
   );
