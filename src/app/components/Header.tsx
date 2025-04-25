@@ -2,11 +2,7 @@ import { withAuth } from '@workos-inc/authkit-nextjs';
 
 import { signOut, getSignInUrl } from '@workos-inc/authkit-nextjs';
 
-import { signIn } from '@workos-inc/authkit-nextjs';
-
 import Link from 'next/link';
-
-import { logout } from './actions/authActions';
 
 export default async function Header() {
   const { user } = await withAuth();
