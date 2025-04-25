@@ -42,17 +42,15 @@ export default async function NewListingPage() {
 
         {Object.keys(organizationsNames).length > 0 ? (
           <div className='grid gap-4 '>
-            {Object.entries(organizationsNames).map(
-              ([orgId, orgName], index) => (
-                <Link
-                  key={orgId}
-                  href={`/new-listing/${orgId}`}
-                  className='block border rounded-lg px-5 py-4 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 hover:bg-gray-50'
-                >
-                  <div className='font-medium text-lg'>{orgName}</div>
-                </Link>
-              )
-            )}
+            {Object.entries(organizationsNames).map(([orgId, orgName]) => (
+              <Link
+                key={orgId}
+                href={`/new-listing/${orgId}`}
+                className='block border rounded-lg px-5 py-4 bg-white shadow-sm hover:shadow-md transition-shadow duration-200 hover:bg-gray-50'
+              >
+                <div className='font-medium text-lg'>{orgName}</div>
+              </Link>
+            ))}
           </div>
         ) : (
           <div className='border border-blue-300 bg-blue-50 text-blue-800 p-4 rounded-md mb-6'>

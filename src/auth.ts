@@ -1,6 +1,6 @@
 // src/auth.ts
 import {
-    withAuth as baseWithAuth,
+   
     getSignInUrl,
   
   } from '@workos-inc/authkit-nextjs';
